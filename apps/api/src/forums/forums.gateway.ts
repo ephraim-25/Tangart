@@ -12,7 +12,7 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @WebSocketGateway({
   cors: {
-    origin: '*', // For development. Should be properly narrowed in prod.
+    origin: '*', // For development. i this Should be properly narrowed in prod.
   },
   namespace: '/forums'
 })
