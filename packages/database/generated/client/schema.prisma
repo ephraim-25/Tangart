@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  LEARNER
+  TEACHER
+  ADMIN
+}
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  role         Role          @default(LEARNER)
+  name         String?
+  posts        Post[]
+  submissions  Submission[]
+  certificates Certificate[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Course {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  price       Float
+  chapters    Chapter[]
+  reviews     Review[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Chapter {
+  id       String  @id @default(uuid())
+  title    String
+  order    Int
+  courseId String
+  course   Course  @relation(fields: [courseId], references: [id])
+  thread   Thread?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Thread {
+  id        String  @id @default(uuid())
+  chapterId String  @unique
+  chapter   Chapter @relation(fields: [chapterId], references: [id])
+  posts     Post[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id       String @id @default(uuid())
+  content  String
+  threadId String
+  thread   Thread @relation(fields: [threadId], references: [id])
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Submission {
+  id              String  @id @default(uuid())
+  fileUrl         String
+  isPublicGallery Boolean @default(false)
+
+  grade    Int?
+  feedback String?
+
+  studentId String
+  student   User   @relation(fields: [studentId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Review {
+  id      String  @id @default(uuid())
+  stars   Int // 1 to 5
+  comment String?
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id])
+
+  authorId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Certificate {
+  id             String @id @default(uuid())
+  pdfUrl         String
+  verificationId String @unique @default(uuid())
+
+  studentId String
+  student   User   @relation(fields: [studentId], references: [id])
+  courseId  String
+
+  createdAt DateTime @default(now())
+}

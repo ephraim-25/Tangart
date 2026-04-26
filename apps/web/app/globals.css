@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  
+  /* Font Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-hero: 4.5rem;
+
+  /* Colors - Default Dark Mode (Galerie Noire) */
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #141414;
+  --bg-glass: rgba(255, 255, 255, 0.04);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --text-primary: #F5F5F0;
+  --text-secondary: #8A8A8A;
+  --accent-gold: #D4AF37;
+  --accent-gold-hover: #E5C04B;
+  --accent-prussian: #1A4B6E;
+  
+  --success: #40916C;
+  --danger: #E63946;
+  --warning: #FFB703;
+}
+
+[data-theme='light'] {
+  --bg-primary: #FAFAF8;
+  --bg-secondary: #F0EDE8;
+  --bg-glass: rgba(255, 255, 255, 0.6);
+  --border-glass: rgba(0, 0, 0, 0.06);
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B6B6B;
+  --accent-gold: #C4A265;
+  --accent-gold-hover: #B8944F;
+  --accent-prussian: #003153;
+  
+  --success: #2D6A4F;
+  --danger: #9B2226;
+  --warning: #CC8B00;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Glassmorphism System */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+}
+
+.glass-heavy {
+  background: var(--bg-glass);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+}
+
+.glass-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.08); /* slight brightness increase for dark mode */
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.08);
+}
+
+/* Base UI Components */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: var(--text-sm);
+  transition: transform 0.15s ease-in-out, background-color 0.3s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-gold);
+  color: #000;
+}
+
+.btn-outline {
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.text-gold {
+  color: var(--accent-gold);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.btn-nav {
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+.btn-nav:hover {
+  color: var(--text-primary);
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+
+/* Dashboard Specific Layout */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.dashboard-sidebar {
+  width: 280px;
+  border-right: 1px solid var(--border-glass);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 2rem 4rem;
+}
