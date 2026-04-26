@@ -1,6 +1,6 @@
 import { Controller, Post, Headers, Req, Res, BadRequestException, Get, Param } from '@nestjs/common';
 import { VideosService } from './videos.service';
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 
 @Controller('videos')
 export class VideosController {

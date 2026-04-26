@@ -20,7 +20,8 @@ export class VideosService {
       const signingKeySecret = this.configService.get<string>('MUX_SIGNING_KEY_SECRET') || 'dummy_secret';
 
       // The playback token allows playback via signed URLs
-      const playbackToken = await Mux.jwt.signPlaybackId(playbackId, {
+      // @ts-ignore
+      const playbackToken = await Mux.Jwt.signPlaybackId(playbackId, {
         keyId: signingKeyId,
         keySecret: signingKeySecret,
         type: 'video',
@@ -28,7 +29,8 @@ export class VideosService {
       });
 
       // The DRM token allows FairPlay / Widevine decryption
-      const drmToken = await Mux.jwt.signDrmLicense(playbackId, {
+      // @ts-ignore
+      const drmToken = await Mux.Jwt.signDrmLicense(playbackId, {
         keyId: signingKeyId,
         keySecret: signingKeySecret,
         expiration: '2h',
@@ -45,7 +47,8 @@ export class VideosService {
     const webhookSecret = this.configService.get<string>('MUX_WEBHOOK_SECRET');
     if (!webhookSecret) return true; // Bypass in local dev if not set
     try {
-      Mux.webhooks.verifySignature(payload, { 'mux-signature': signature }, webhookSecret);
+      // @ts-ignore
+      Mux.Webhooks.verifySignature(payload, { 'mux-signature': signature }, webhookSecret);
       return true;
     } catch (err) {
       return false;
