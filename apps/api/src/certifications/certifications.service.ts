@@ -1,6 +1,8 @@
 import { Injectable, StreamableFile, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+// @ts-ignore
 import PDFDocument from 'pdfkit';
+// @ts-ignore
 import QRCode from 'qrcode';
 
 @Injectable()
