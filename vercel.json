@@ -9,8 +9,8 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "apps/api/src/main.ts",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+      "dest": "apps/api/src/main.ts"
     }
-  ]
+  ],
+  "outputDirectory": "apps/api/dist"
 }
