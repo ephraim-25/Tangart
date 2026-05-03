@@ -17,7 +17,7 @@ export default function Home() {
         zIndex: 100,
       }}>
         <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 600 }}>
-          Plam's Art<span className="text-gold">.</span>
+          Tang'Art<span className="text-gold">.</span>
         </div>
         <nav style={{ display: 'flex', gap: '2rem' }}>
           <a href="#discover" className="btn-nav">Découvrir</a>

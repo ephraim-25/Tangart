@@ -13,4 +13,7 @@
     }
   ],
   "outputDirectory": "apps/api/dist"
+  {
+  "rewrites": [{ "source": "/api/(.*)", "destination": "/apps/api/src/main.ts" }]
+}
 }
