@@ -20,10 +20,13 @@ async function bootstrapServer() {
 }
 
 // Handler pour Vercel Serverless
-export default async function handler(req: any, res: any) {
+const handler = async (req: any, res: any) => {
   const server = await bootstrapServer();
   return server(req, res);
-}
+};
+
+export default handler;
+module.exports = handler;
 
 // Pour le développement local (exécuté si non déployé sur Vercel)
 if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
